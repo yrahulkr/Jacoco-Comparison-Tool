@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
@@ -58,8 +59,10 @@ public class CoverageDiff {
 		this.title = projectDirectory.getName();
 		TOTAL_LABEL = "Total " + type + " Coverage";
 		this.projectDirectory = projectDirectory;
-		this.classesDirectory = new File(projectDirectory, "classes");
-		this.sourceDirectory = new File(projectDirectory, "src");
+		this.classesDirectory = Paths.get(projectDirectory.getAbsolutePath(), "target", "classes").toFile();
+		this.sourceDirectory = Paths.get(projectDirectory.getAbsolutePath(), "code", "src").toFile();
+//		this.classesDirectory = new File(projectDirectory, "classes");
+//		this.sourceDirectory = new File(projectDirectory, "src");
 		this.reportDirectory = new File(reportDirectory, type);
 		prepareReportDirectory();
 		
